@@ -9,13 +9,23 @@ const Kanban = () => {
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
-    const { source, destination } = result;
+    const { source, destination} = result;
 
+    if (source.droppableId === destination.droppableId){
+        const destinationRowIndex = data.findIndex((e) => e.id === destination.droppableId);
+
+        const destinationRow = data[destinationRowIndex];
+        const destinationTask = [...destinationRow.tasks];
+        const [removed] = destinationTask.splice(source.index, 1);
+        destinationTask.splice(destination.index, 0, removed);
+        data[destinationRowIndex].tasks = destinationTask;
+
+        setData(data);
+    } 
+    
     if (source.droppableId !== destination.droppableId) {
       const sourceColIndex = data.findIndex((e) => e.id === source.droppableId);
-      const destinationColIndex = data.findIndex(
-        (e) => e.id === destination.droppableId
-      );
+      const destinationColIndex = data.findIndex((e) => e.id === destination.droppableId);
 
       const sourceCol = data[sourceColIndex];
       const destinationCol = data[destinationColIndex];
