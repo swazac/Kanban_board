@@ -2,8 +2,16 @@
     padding: 30px;
     background-color: #E2D784;
     color: black;
+    font-size: 1.5rem;
     border-radius: 10px;
     text-align: center;
     justify-content: center;
     word-wrap: break-word;
+}
+
+/* If the screen size is 601px wide or less, hide the element */
+@media screen and (min-width: 1800px) {
+  .card {
+        font-size: 2rem;
+    }
 }
